@@ -1,11 +1,14 @@
 import cv2
 import filtrado as f
+import reconocerLetras as rl
 
 umbral = 120
 
+# ==== HACER QUE PRIMERO SE SAQUE CAPTURA A LA HOJA
+
 # Cámara del móvil
 # poner tu propia IP
-camara = cv2.VideoCapture('http://192.168.1.129:8080/video')
+camara = cv2.VideoCapture('/video')
 
 if not camara.isOpened():
     print("No es posible abrir la cámara")
@@ -34,9 +37,11 @@ while True:
         print("No es posible obtener la imagen")
         break
 
-    frame = redimensionar_alto(frame, 800)  
+    frame = redimensionar_alto(frame, 800) 
 
     frame_umbral = f.filtrado(frame)
+
+    rl.encontrarCortorno(frame, frame_umbral)
 
     cv2.imshow('imagen original', frame)
     cv2.imshow('imagen filtrada', frame_umbral)

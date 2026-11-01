@@ -13,11 +13,12 @@ def actualizar_constante(cte):
 
 def aplicar_filtros(frame):
     blanconegro = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('imagen en grises', blanconegro)
+    # cv2.imshow('imagen en grises', blanconegro)
 
     # se puede intentar aplicando el filtro de Canny, con lo que no haría falta
     # barra deslizante (?)
     # edges = cv2.Canny(frame, 150, 250)
+    
     return blanconegro
 
 def calcular_bloque_valido():
