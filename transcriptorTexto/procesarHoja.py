@@ -1,17 +1,18 @@
 import cv2
 import numpy as np
+import config
 
-umbral = 200
-porcentaje_error = 0.02
+umbral = config.UMBRAL
+porcentaje_error = config.PORCENTAJE_ERROR
 
 # areas de las letras
-area_min = 40
-area_max = 8000
-margen = 15 #  pixeles que se ignoran
+area_min = config.AREA_MIN
+area_max = config.AREA_MAX
+margen = config.MARGEN #  pixeles que se ignoran
 
-# tam de hoja enderezada en A4
-ancho_hoja = 595
-alto_hoja = 842
+# tam de hoja enderezada
+ancho_hoja = config.ANCHO_HOJA
+alto_hoja = config.ALTO_HOJA
 dest = np.array([[0, 0], [ancho_hoja, 0], [ancho_hoja, alto_hoja], [0, alto_hoja]], dtype=np.float32)
 
 fuente = cv2.FONT_HERSHEY_SIMPLEX

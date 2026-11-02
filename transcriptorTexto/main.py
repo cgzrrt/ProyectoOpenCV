@@ -1,11 +1,13 @@
 import os
 import cv2
+import config
 import filtrado as f
 import procesarHoja as ph
+import procesarLetras as pl
 
 umbral = 120
 
-carpeta = 'Salida'
+carpeta = config.CARPETA_SALIDA
 archivo = carpeta + '/hoja.jpg'
 
 # Cámara del móvil
@@ -34,18 +36,18 @@ cv2.createTrackbar('constante', 'imagen original', f.constante, 100, f.actualiza
 hoja = None
 
 while True:
+    ret, frame = camara.read()
+    if not ret:
+        print("No es posible obtener la imagen")
+        break
 
     if hoja is None:
-        ret, frame = camara.read()
-        if not ret:
-            print("No es posible obtener la imagen")
-            break
-
         frame = redimensionar_alto(frame, 800) 
-
+        copia = frame.copy()
         esquinas = ph.detectar_hoja(frame)
 
         cv2.imshow('imagen original', frame)
+        cv2.imshow('imagen filtrada', f.filtrado(copia))
     else:
         frame_umbral = f.filtrado(hoja)
 

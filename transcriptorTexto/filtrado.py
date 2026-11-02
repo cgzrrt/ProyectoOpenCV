@@ -1,7 +1,8 @@
 import cv2
+import config
 
-bloque = 31
-constante = 15
+bloque = config.BLOQUE
+constante = config.CONSTANTE
 
 def actualizar_bloque(blq):
     global bloque
