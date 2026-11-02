@@ -7,9 +7,13 @@ import config
 # -------------------------------------------------------------
 
 def guardar(carpeta, nombre, img):
-    """Guarda la imagen; la extension del nombre decide el formato (.png / .jpg)."""
+    """Guarda la imagen; la extension del nombre decide el formato (.png / .jpg).
+    Si la imagen esta vacia no se guarda (cv2.imwrite daria error)."""
+    if img is None or img.size == 0:
+        print("  AVISO: imagen vacia, no se guarda:", nombre)
+        return False
     os.makedirs(carpeta, exist_ok=True)
-    cv2.imwrite(os.path.join(carpeta, nombre), img)
+    return cv2.imwrite(os.path.join(carpeta, nombre), img)
 
 
 def listar_entrada():
