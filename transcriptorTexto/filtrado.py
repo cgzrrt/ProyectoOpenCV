@@ -32,7 +32,7 @@ def filtrado(frame):
     frame_filtrada = aplicar_filtros(frame)
     bloq = calcular_bloque_valido()
 
-    frame_umbral = cv2.adaptiveThreshold(frame_filtrada, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, bloq, constante)
+    frame_umbral = cv2.adaptiveThreshold(frame_filtrada, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, bloq, constante)
 
     return frame_umbral
 
