@@ -1,5 +1,6 @@
 import cv2
 import config
+import numpy as np
 
 bloque = config.BLOQUE
 constante = config.CONSTANTE
@@ -32,6 +33,11 @@ def filtrado(frame):
     # INV para que quede tinta blanca sobre fondo negro
     frame_umbral = cv2.adaptiveThreshold(frame_filtrada, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, bloq, constante)
 
-    return frame_umbral
+    # limpieza de ruido
+    kernel = np.ones((2, 2), np.uint8)
+    frame_limpio = cv2.erode(frame_umbral, kernel)
+    frame_limpio = cv2.dilate(frame_limpio, kernel)
+
+    return frame_limpio
 
     

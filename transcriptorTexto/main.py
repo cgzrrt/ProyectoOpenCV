@@ -5,10 +5,9 @@ import filtrado as f
 import procesarHoja as ph
 import procesarLetras as pl
 
-umbral = 120
-
 carpeta = config.CARPETA_SALIDA
 archivo = carpeta + '/hoja.jpg'
+archivo_texto = carpeta + '/texto.txt'
 
 # Cámara del móvil
 # poner tu propia IP
@@ -34,6 +33,9 @@ cv2.createTrackbar('bloque', 'imagen original', f.bloque, 100, f.actualizar_bloq
 cv2.createTrackbar('constante', 'imagen original', f.constante, 100, f.actualizar_constante)
 
 hoja = None
+plantillas = pl.crearPlantillas()
+texto = ""
+esquinas = None
 
 while True:
     ret, frame = camara.read()
@@ -50,9 +52,16 @@ while True:
         cv2.imshow('imagen filtrada', f.filtrado(copia))
     else:
         frame_umbral = f.filtrado(hoja)
-
         hoja_copia = hoja.copy()
-        ph.encontrarCortorno(hoja_copia, frame_umbral)
+
+        cajas = ph.encontrarCortorno(hoja_copia, frame_umbral)
+        lineas = pl.ordenarCajas(cajas)
+        texto, resultados = pl.transcribir(frame_umbral, lineas, plantillas)
+
+        
+        for (x, y, ancho, alto), letra in resultados:
+            cv2.rectangle(hoja_copia, (x, y), (x+ancho, y+alto), color_texto, grosor)
+            cv2.putText(hoja_copia, letra, (x, y-3), fuente, 0.5, color, 1)
 
         cv2.imshow('imagen original', hoja_copia)
         cv2.imshow('imagen filtrada', frame_umbral)
@@ -60,7 +69,7 @@ while True:
     tecla = cv2.waitKey(1)
 
     if tecla == ord(' ') and hoja is None and esquinas is not None:
-        hoja = ph.enderezarHoja(frame, esquinas)
+        hoja = ph.enderezarHoja(copia, esquinas)
         cv2.imwrite(archivo, hoja)
 
         print("Hoja guardada en: ", archivo)
@@ -68,6 +77,12 @@ while True:
     if tecla == ord('r'):
         hoja = None
         cv2.destroyWindow('imagen filtrada')
+
+    if tecla == ord('t') and hoja is not None:
+        print(texto)
+        with open(archivo_texto, 'w', encoding='utf-8') as fichero:
+            fichero.write(texto)
+        print("texto guardado en: ", archivo_texto)
     
     if tecla == ord('q'):
         break
