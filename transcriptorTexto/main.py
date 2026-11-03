@@ -11,7 +11,7 @@ archivo_texto = carpeta + '/texto.txt'
 
 # Cámara del móvil
 # poner tu propia IP
-camara = cv2.VideoCapture('http://192.168.1.129:8080/video')
+camara = cv2.VideoCapture('http://10.108.50.4:8080/video')
 
 if not camara.isOpened():
     print("No es posible abrir la cámara")
@@ -43,6 +43,8 @@ while True:
         print("No es posible obtener la imagen")
         break
 
+    # si no hay hoja procesada, detecta las esquinas del papel
+    # las esquinas que detecta son las del área de mayor tamano
     if hoja is None:
         frame = redimensionar_alto(frame, 800) 
         copia = frame.copy()
@@ -51,8 +53,9 @@ while True:
         cv2.imshow('imagen original', frame)
         cv2.imshow('imagen filtrada', f.filtrado(copia))
     else:
+        # cuando se ha seleccionado una hoja, se filtra
         frame_umbral = f.filtrado(hoja)
-        hoja_copia = hoja.copy()
+        hoja_copia = hoja.copy() # se trabaja sobre una copia
 
         cajas = ph.encontrarCortorno(hoja_copia, frame_umbral)
         lineas = pl.ordenarCajas(cajas)
@@ -60,8 +63,11 @@ while True:
 
         
         for (x, y, ancho, alto), letra in resultados:
-            cv2.rectangle(hoja_copia, (x, y), (x+ancho, y+alto), color_texto, grosor)
-            cv2.putText(hoja_copia, letra, (x, y-3), fuente, 0.5, color, 1)
+            cv2.rectangle(hoja_copia, (x, y), (x+ancho, y+alto), config.COLOR_RECT, config.GROSOR)
+            cv2.putText(hoja_copia, letra, (x, y-3), config.FUENTE, 0.5, config.COLOR_TEXTO, 1)
+
+        for (x, y, ancho, alto), letra in resultados:
+            cv2.putText(hoja_copia, letra, (x, y-3), ph.fuente, 0.5, ph.color, 1)
 
         cv2.imshow('imagen original', hoja_copia)
         cv2.imshow('imagen filtrada', frame_umbral)

@@ -1,6 +1,13 @@
+import cv2 
 
 # ---- rutas
 CARPETA_SALIDA = 'Salida'
+
+# --- VISUAL ----
+COLOR_TEXTO = (0, 255, 0)
+COLOR_RECT = (0, 0, 255)
+GROSOR = 1
+FUENTE = cv2.FONT_HERSHEY_SIMPLEX
 
 # ---- filtrado ----
 BLOQUE = 31

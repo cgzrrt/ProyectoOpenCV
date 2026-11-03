@@ -26,6 +26,8 @@ def calcular_bloque_valido():
     
     return bloque_valido
 
+# filtra la imagen seleccionada con blanco/negro y suavizado
+# luego limpia el ruido
 def filtrado(frame):
     frame_filtrada = aplicar_filtros(frame)
     bloq = calcular_bloque_valido()
