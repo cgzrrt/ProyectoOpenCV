@@ -6,6 +6,8 @@ import pagina
 import separar_fotos
 import manual
 import mejora
+import colorear
+import pintar
 
 # ============================================================
 #  PROCESADO DE FOTOS DE ÁLBUM (sin vídeo)
@@ -56,7 +58,15 @@ def procesar_album(img, nombre):
     for i, foto in enumerate(fotos, 1):
         nombre_foto = '%s_foto_%02d' % (nombre, i)
         archivos.guardar(config.CARPETA_SIN_MEJORAR, nombre_foto + '.png', foto)
-        archivos.guardar(config.CARPETA_FOTOS_SALIDA, nombre_foto + '.jpg', mejora.mejorar_foto(foto))
+        # archivos.guardar(config.CARPETA_FOTOS_SALIDA, nombre_foto + '.jpg', mejora.mejorar_foto(foto))
+        mejorada = mejora.mejorar_foto(foto)
+        if config.COLOREAR:
+            mejorada = colorear.colorearFoto(mejorada)
+            archivos.guardar(config.CARPETA_FOTOS_SALIDA, nombre_foto + 'AUTO.jpg', mejorada)
+            if config.COLOREAR_A_MANO and config.MOSTRAR_VENTANAS:
+                mejoradaMano = pintar.pintar(mejorada)
+                archivos.guardar(config.CARPETA_FOTOS_SALIDA, nombre_foto + 'MANO.jpg', mejoradaMano)
+        
     return True
 
 

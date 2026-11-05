@@ -79,3 +79,15 @@ QUITAR_RUIDO = True
 ESTIRAR_CONTRASTE = True
 ENFOCAR = True
 FACTOR_ENFOQUE = 0.5
+
+# ---------- Paso 4: colorear las fotos ----------
+COLOREAR = True
+COLOREAR_A_MANO = True
+RUTA_HAAR = "../haarcascades/haarcascade_frontalface_default.xml"
+SATURACION_MAX_BIN = 35
+TINTE_FONDO = (1, 6)
+PIEL_A = 13
+PIEL_B = 20
+PALIDEZ_MAX = 0.55
+
+ALTO_VENTANA = 800
