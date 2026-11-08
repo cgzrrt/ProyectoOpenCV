@@ -3,9 +3,9 @@ import numpy as np
 import config
 
 # ============================================================
-#  Validación de un rectángulo: ¿tiene un borde nítido y recto en los 4 lados?
-#  Se compara el color medio de una ventana a cada lado de la línea (restas, P26).
-#  Una foto cumple en sus cuatro lados; un trozo de marco o de fondo, no.
+#  Validación de un rectángulo
+#  Se compara el color medio de una ventana a cada lado de la línea
+#  Una foto cumple en sus cuatro lados, un trozo de marco o de fondo, no.
 # ============================================================
 
 

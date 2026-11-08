@@ -11,7 +11,7 @@ archivo_texto = carpeta + '/texto.txt'
 
 # Cámara del móvil
 # poner tu propia IP
-camara = cv2.VideoCapture('http://10.108.50.4:8080/video')
+camara = cv2.VideoCapture('http://10.121.167.40:8080/video')
 
 if not camara.isOpened():
     print("No es posible abrir la cámara")

@@ -21,5 +21,11 @@ Una vez se ha escaneado la hoja se pueden ajustar los bordes de las letras con d
 
 Este proyecto cuenta con algunas limitaciones:
 
+#### TEXTO:
 - Algunos caracteres no se leen. Con el uso de `matchTemplate` se comparan las letras con una plantilla definida de letras mayúsculas. A veces esta comparación falla.
 - Funciona mejor con texto escrito por máquina, pero la letra 'O' es normalmente confundida con una 'D'.
+
+#### FOTOS:
+- Si las fotos estan solapadas tiende a "encontrar" fotos de más
+- Si no hay una distinción clara con el fondo del album es posible que confunda parte del fondo con la foto o viceversa
+- 

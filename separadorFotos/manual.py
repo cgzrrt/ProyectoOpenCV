@@ -3,7 +3,7 @@ import numpy as np
 import utiles
 
 # ============================================================
-#  Corrección a mano con el ratón (como en P73, con setMouseCallback)
+#  Corrección a mano con el ratón
 #
 #    Arrastrar con el botón izquierdo  -> añade una foto
 #    Clic derecho sobre un recuadro    -> lo borra
