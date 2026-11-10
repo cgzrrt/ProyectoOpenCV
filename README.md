@@ -7,6 +7,7 @@ Programa que permite escanear texto y fotos.
 carpeta raiz
 python3 -m main
 ```
+En la interfaz desplegada se elige el modo a ejecutar o si se quiere salir, una vez seleccionado el modo se espera un poco y este se ejecutará, si se quiere finalizar el modo de ejecución con pulsar la `q` se vuelve al menú de selección.
 
 ## Escáner de fotos
 
@@ -33,6 +34,8 @@ python3 -m main
 Para escanear una hoja se debe pulsar `Espacio`. Para re-escanearla `R` y para transcribir el texto `T`.
 
 Una vez se ha escaneado la hoja se pueden ajustar los bordes de las letras con dos _thresholds_ para intentar que cuadren mejor.
+
+Es necesario modificar el método de conexión pues está puesto un dispositivo móvil por IP.
 
 ### Limitaciones
 
